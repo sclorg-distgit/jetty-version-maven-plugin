@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.0.7
-Release:        9.10%{?dist}
+Release:        9.11%{?dist}
 Summary:        Jetty version management Maven plugin
 
 License:        ASL 2.0 or EPL
@@ -13,10 +13,10 @@ Source0:        http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/s
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-mvn(org.apache.commons:commons-lang3)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-plugin-api)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-project)
-BuildRequires:  maven30-mvn(org.eclipse.jetty.toolchain:jetty-toolchain:pom:)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.commons:commons-lang3)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-plugin-api)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-project)
+BuildRequires:  %{?scl_prefix}mvn(org.eclipse.jetty.toolchain:jetty-toolchain:pom:)
 
 
 %description
@@ -31,7 +31,7 @@ Summary:        API documentation for %{pkg_name}
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # copy license files
 cp -p jetty-distribution-remote-resources/src/main/resources/* .
@@ -43,7 +43,7 @@ sed -i 's|edu.emory.mathcs.backport.||' \
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 pushd %{pkg_name}
 # skip tests because we don't have jetty-test-helper (yet)
@@ -51,7 +51,7 @@ pushd %{pkg_name}
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 pushd %{pkg_name}
 %mvn_install
@@ -67,6 +67,9 @@ pushd %{pkg_name}
 %doc LICENSE-APACHE-2.0.txt LICENSE-ECLIPSE-1.0.html notice.html
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.0.7-9.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.0.7-9.10
 - maven33 rebuild
 
