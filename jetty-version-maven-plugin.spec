@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.0.7
-Release:        9.11%{?dist}
+Release:        9.12%{?dist}
 Summary:        Jetty version management Maven plugin
 
 License:        ASL 2.0 or EPL
@@ -12,7 +12,7 @@ URL:            http://www.eclipse.org/jetty/
 Source0:        http://git.eclipse.org/c/jetty/org.eclipse.jetty.toolchain.git/snapshot/%{pkg_name}-%{version}.tar.bz2
 BuildArch:      noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}mvn(org.apache.commons:commons-lang3)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-plugin-api)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-project)
@@ -67,6 +67,9 @@ pushd %{pkg_name}
 %doc LICENSE-APACHE-2.0.txt LICENSE-ECLIPSE-1.0.html notice.html
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.0.7-9.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.0.7-9.11
 - maven33 rebuild #2
 
